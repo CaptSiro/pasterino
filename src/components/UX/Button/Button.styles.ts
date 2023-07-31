@@ -1,5 +1,6 @@
 import { Styles } from "../../../@types";
 import mergeStyles from "../../../lib/style/mergeStyles";
+import { borderRadius } from "../../Root.styles";
 
 
 
@@ -8,7 +9,7 @@ export const uxButton: Styles = {
     color: "white",
     border: "unset",
     padding: "8px",
-    borderRadius: "4px",
+    borderRadius,
     outline: "0 solid transparent"
 }
 

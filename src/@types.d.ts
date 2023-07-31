@@ -1,4 +1,6 @@
 export type CopyPasta = {
     content: string,
-    search: string,
+    keywords: string[],
 }
+
+export type Styles = Partial<CSSStyleDeclaration>;
