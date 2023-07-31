@@ -3,7 +3,7 @@ type Modifiers = "ctrl" | "shift" | "alt";
 
 
 export type KeyboardRegister = {
-    onPress: () => any,
+    onPress: (event: KeyboardEvent) => any,
     key: KeyboardEvent["key"],
     modifiers?: Modifiers[],
     preventDefault?: boolean,
@@ -15,8 +15,9 @@ export type KeyboardRegister = {
 export class Keyboard {
     private readonly registers: KeyboardRegister[] = [];
 
-    register(r: KeyboardRegister): void {
+    register(r: KeyboardRegister): Keyboard {
         this.registers.push(r);
+        return this;
     }
 
     private handler(event: KeyboardEvent): void {
@@ -49,7 +50,7 @@ export class Keyboard {
                 continue;
             }
 
-            r.onPress();
+            r.onPress(event);
 
             if (r.preventDefault) {
                 event.preventDefault();
