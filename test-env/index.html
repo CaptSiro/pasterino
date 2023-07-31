@@ -25,17 +25,55 @@
             color: white;
         }
 
+        .chat {
+            width: 300px;
+            padding: 10px;
+            background-color: #223;
+            height: 100%;
+
+            display: grid;
+            grid-template-rows: 1fr 64px;
+        }
+
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
         [contenteditable] {
             padding: 10px;
-            margin-bottom: 64px;
-            margin-right: 16px;
-            width: 300px;
-            background-color: #223;
+            width: 100%;
+            border-radius: 4px;
+            outline: 2px solid #556;
+            white-space: nowrap;
         }
     </style>
     <script src="./dist/main.js"></script>
 </head>
 <body>
-    <div data-a-target="chat-input" contenteditable="true" spellcheck="false"></div>
+    <div class="chat">
+        <div class="messages"></div>
+
+        <div>
+            <div data-a-target="chat-input" contenteditable="true" spellcheck="false"></div>
+            <script>
+                const messages = document.querySelector(".messages");
+                const chat = document.currentScript.previousElementSibling;
+                chat?.addEventListener("keydown", evt => {
+                    if (evt.key === "Enter" && !evt.ctrlKey && !evt.altKey && !evt.shiftKey) {
+                        const msg = document.createElement("div");
+                        msg.textContent = chat.textContent.trim();
+                        chat.textContent = "";
+                        messages.append(msg);
+                        chat.focus();
+                        evt.preventDefault();
+                    }
+                });
+            </script>
+        </div>
+    </div>
 </body>
 </html>
