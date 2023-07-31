@@ -74,7 +74,7 @@ function addComponentOptions(component: Element, options: ComponentOptions): voi
     }
 }
 
-function createCSSString(styles: Record<string, any>): string {
+export function createCSSString(styles: Record<string, any>): string {
     let buffer = "";
 
     for (const key in styles) {

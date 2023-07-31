@@ -1,4 +1,4 @@
-import { _, Button, Component, ComponentContent, ComponentOptions } from "../../../lib/tungsten/jsml";
+import { _, Component, ComponentContent, ComponentOptions } from "../../../lib/tungsten/jsml";
 import { uxButton, uxButtonHover } from "./Button.styles";
 import changeStyle from "../../../lib/style/changeStyle";
 

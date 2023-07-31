@@ -1,8 +1,8 @@
 import Store from "./Store";
-import LocalStore from "./LocalStore";
+import TestStore from "./TestStore";
 
 
 
 export default function getDefaultStore(): Store {
-    return new LocalStore();
+    return new TestStore();
 }
