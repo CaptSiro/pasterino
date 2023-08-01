@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js",
-    "dev": "npm run build && @powershell copy ./dist/main.js ./test-env/dist/main.js && @powershell copy ./dist/style.css ./test-env/dist/style.css",
+    "dev": "npm run build && @powershell copy ./dist/main.js ./test-env/dist/main.js && @powershell copy ./dist/styles.css ./test-env/dist/styles.css",
     "dev:watch": "nodemon -e ts -x \"npm run dev\""
   },
   "repository": {
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/chrome": "0.0.242",
     "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
     "mini-css-extract-plugin": "^2.7.6",
     "nodemon": "^3.0.1",
     "ts-loader": "^9.4.4",
