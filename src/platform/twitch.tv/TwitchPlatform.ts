@@ -14,12 +14,16 @@ type ChatInput = {
 
 export default class TwitchPlatform implements Platform {
     setChatInput(data: string): void {
-        this.getChatInput().props.onChange({
+        this.getChatInputReact().props.onChange({
             target: { value: data }
         });
     }
 
-    getChatInput(): ChatInput {
+    getChatInput(): HTMLElement | undefined {
+        return document.querySelector<HTMLElement>('.chat-input__textarea') ?? undefined;
+    }
+
+    getChatInputReact(): ChatInput {
         return this.getAutocompleteHandler()?.componentRef;
     }
 
