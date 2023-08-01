@@ -5,7 +5,7 @@ import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
 import Platform from "../../platform/Platform";
 import { url } from "../../lib/location-listener";
-import { toggleWidgetVisibility } from "./widget-visibility";
+import { hideWidget, toggleWidgetVisibility } from "./widget-visibility";
 import Selector from "../../lib/Selector";
 import ctrlSpaceVisibility from "./registers/ctrl-space-visibility";
 import enterSubmit from "./registers/enter-submit";
@@ -79,6 +79,17 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
 
 
 
+    const outsideEventHandler = hideOnOutsideEvent(widget, chatInput);
+
+    window.removeEventListener("pointerdown", outsideEventHandler);
+    window.addEventListener("pointerdown", outsideEventHandler);
+
+    window.removeEventListener("keydown", outsideEventHandler);
+    window.addEventListener("keydown", outsideEventHandler);
+
+
+
+
     return widget;
 }
 
@@ -99,5 +110,23 @@ function onResize(widget: HTMLElement, chatInput: HTMLElement) {
 
         widget.style.setProperty("--bottom", bottom);
         widget.style.setProperty("--right", right);
+    };
+}
+
+
+
+function hideOnOutsideEvent(widget: HTMLElement, chatInput: HTMLElement): (event: Event) => any {
+    return evt => {
+        const t = evt.target;
+
+        if (!(t instanceof HTMLElement)) {
+            return;
+        }
+
+        if (widget.contains(t) || chatInput.contains(t)) {
+            return;
+        }
+
+        hideWidget(widget);
     };
 }
