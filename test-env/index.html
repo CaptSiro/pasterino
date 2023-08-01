@@ -25,6 +25,12 @@
             color: white;
         }
 
+        label {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+
         .chat {
             width: 300px;
             padding: 10px;
@@ -54,6 +60,24 @@
     <script src="./dist/main.js"></script>
 </head>
 <body>
+    <label>
+        <span>Channel: </span>
+        <select>
+            <option value="btmc" selected>BTMC</option>
+            <option value="captsiro">CaptSiro</option>
+        </select>
+
+        <script>
+            const select = document.currentScript.previousElementSibling;
+            select.addEventListener("change", () => {
+                const location = new URL(window.location.href);
+                location.searchParams.set("c", select.value);
+                window.history.replaceState({}, select.value, location);
+                document.title = select.value;
+            });
+        </script>
+    </label>
+
     <div class="chat">
         <div class="messages"></div>
 
