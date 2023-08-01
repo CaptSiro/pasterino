@@ -14,7 +14,7 @@ type ChatInput = {
 
 export default class TwitchPlatform implements Platform {
     setChatInput(data: string): void {
-        this.getChatInputReact().props.onChange({
+        this.getChatInputReact()?.props.onChange({
             target: { value: data }
         });
     }
@@ -23,14 +23,14 @@ export default class TwitchPlatform implements Platform {
         return document.querySelector<HTMLElement>('.chat-input__textarea') ?? undefined;
     }
 
-    // source 7tv
+    // source: 7tv
     getChatInputReact(): ChatInput {
         return this.getAutocompleteHandler()?.componentRef;
     }
 
     getAutocompleteHandler() {
         const node = this.findReactChildren(
-            this.getReactInstance(document.querySelector('.chat-input__textarea')),
+            this.getReactInstance(this.getChatInput()),
             (n: any) => n.stateNode.providers
         );
 
@@ -51,10 +51,14 @@ export default class TwitchPlatform implements Platform {
         return null;
     }
 
-    getReactInstance(el: Element | null): { [x: string]: any; } | undefined {
-        for (const k in el) {
-            if (k.startsWith('__reactInternalInstance$')) {
-                return (el as any)[k] as any;
+    getReactInstance(element: HTMLElement | undefined): Record<string, any> | undefined {
+        if (element === undefined) {
+            return;
+        }
+
+        for (const key in element) {
+            if (key.startsWith('__reactInternalInstance$')) {
+                return (element as any)[key] as any;
             }
         }
     }
