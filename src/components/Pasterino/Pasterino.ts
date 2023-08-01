@@ -90,22 +90,6 @@ function calculatePosition(rect: DOMRect): { readonly bottom: string, readonly r
 
 
 
-function hideOnChannelChange() {
-    const widget = $(".pasterino-root");
-
-    if (widget === null) {
-        return;
-    }
-
-    if (!(widget instanceof HTMLElement)) {
-        return;
-    }
-
-    widget.style.display = "none";
-}
-
-
-
 function onResize(widget: HTMLElement, chatInput: HTMLElement) {
     return () => {
         const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
