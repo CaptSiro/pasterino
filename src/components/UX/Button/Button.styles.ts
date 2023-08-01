@@ -1,5 +1,5 @@
 import { Styles } from "../../../@types";
-import mergeStyles from "../../../lib/style/mergeStyles";
+import mergeStyles from "../../../lib/style/merge-styles";
 import { borderRadius } from "../../Root.styles";
 
 
