@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js",
-    "dev": "npm run build && @powershell copy ./dist/main.js ./test-env/dist/main.js",
+    "dev": "npm run build && @powershell copy ./dist/main.js ./test-env/dist/main.js && @powershell copy ./dist/style.css ./test-env/dist/style.css",
     "dev:watch": "nodemon -e ts -x \"npm run dev\""
   },
   "repository": {
