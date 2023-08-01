@@ -1,4 +1,4 @@
-import { _, Div } from "../../lib/tungsten/jsml";
+import { Div } from "../../lib/tungsten/jsml";
 import { $ } from "../../lib/tungsten/domx";
 import { Keyboard } from "../../lib/Keyboard";
 import isVisible from "../../lib/isVisible";
@@ -7,10 +7,11 @@ import mergeStyles from "../../lib/style/mergeStyles";
 import { pasterinoStyles } from "./Pasterino.styles";
 import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
+import Platform from "../../platform/Platform";
 
 
 
-export default function Pasterino(chatInput: HTMLElement): HTMLElement {
+export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
     const position = calculatePosition(chatInput.getBoundingClientRect()) as Styles;
 
     const widget = Div("pasterino-root", [
@@ -42,12 +43,12 @@ export default function Pasterino(chatInput: HTMLElement): HTMLElement {
         })
         .register({
             key: "Enter",
-            onPress: (evt) => {
+            onPress: () => {
                 if (!isVisible(widget)) {
                     return;
                 }
 
-
+                // set selected copy pasta
             }
         })
         .register({
@@ -72,6 +73,7 @@ export default function Pasterino(chatInput: HTMLElement): HTMLElement {
 
     chatInput.removeEventListener("keydown", middleware.eventHandler, { capture: true });
     chatInput.addEventListener("keydown", middleware.eventHandler, { capture: true });
+
 
 
     return widget;
@@ -110,12 +112,4 @@ function onResize(widget: HTMLElement, chatInput: HTMLElement) {
         widget.style.bottom = bottom;
         widget.style.right = right;
     };
-}
-
-
-
-function onKeyUp(widget: HTMLElement, chatInput: HTMLElement) {
-    return () => {
-
-    }
 }

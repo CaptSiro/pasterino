@@ -23,6 +23,7 @@ export default class TwitchPlatform implements Platform {
         return document.querySelector<HTMLElement>('.chat-input__textarea') ?? undefined;
     }
 
+    // source 7tv
     getChatInputReact(): ChatInput {
         return this.getAutocompleteHandler()?.componentRef;
     }
