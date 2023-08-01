@@ -2,13 +2,7 @@ import { $ } from "../../lib/tungsten/domx";
 
 
 
-export function toggleWidgetVisibility(force?: boolean): void {
-    const widget = $<HTMLElement>(".pasterino-root");
-
-    if (widget === null) {
-        return;
-    }
-
+export function toggleWidgetVisibility(widget: HTMLElement, force?: boolean): void {
     if (force !== undefined) {
         if (force) {
             showWidget(widget);

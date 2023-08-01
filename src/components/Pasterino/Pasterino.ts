@@ -8,6 +8,8 @@ import { pasterinoStyles } from "./Pasterino.styles";
 import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
 import Platform from "../../platform/Platform";
+import { url } from "../../lib/location-listener";
+import { toggleWidgetVisibility } from "./widget-visibility";
 
 
 
@@ -18,6 +20,13 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
         Controls(),
         CopyPastaView()
     ], { style: mergeStyles(pasterinoStyles, position) });
+
+
+
+    const onLocationChange = () => toggleWidgetVisibility(widget, true);
+
+    url.removeListener(onLocationChange);
+    url.listen(onLocationChange);
 
 
 
