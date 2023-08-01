@@ -10,6 +10,7 @@
     "content_scripts": [{
         "matches": ["*://*.twitch.tv/*"],
         "js": ["main.js"],
-        "css": ["styles.css"]
+        "css": ["styles.css"],
+        "world": "MAIN"
     }]
 }

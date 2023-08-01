@@ -19,7 +19,10 @@ usages to find implementation for this function I only get where it is called no
 
 # Answer
 
-It's a function from twitch. See https://github.com/SevenTV/Extension/blob/97f75e38204cdcc747e60e380eb68056df041d8e/src/common/ReactHooks.ts#L64-L100 and https://github.com/SevenTV/Extension/blob/97f75e38204cdcc747e60e380eb68056df041d8e/src/site/twitch.tv/modules/chat-input/ChatInputModule.vue#L31-L46 and https://github.com/SevenTV/Extension/blob/97f75e38204cdcc747e60e380eb68056df041d8e/src/site/twitch.tv/modules/chat-input/ChatInput.vue#L172-L174 on how to find it. It can be simplified to
+It's a function from twitch. See https://github.com/SevenTV/Extension/blob/97f75e38204cdcc747e60e380eb68056df041d8e/src/common/ReactHooks.ts#L64-L100
+and https://github.com/SevenTV/Extension/blob/97f75e38204cdcc747e60e380eb68056df041d8e/src/site/twitch.tv/modules/chat-input/ChatInputModule.vue#L31-L46
+and https://github.com/SevenTV/Extension/blob/97f75e38204cdcc747e60e380eb68056df041d8e/src/site/twitch.tv/modules/chat-input/ChatInput.vue#L172-L174
+on how to find it. It can be simplified to
 
 ```javascript
 const findReact = dom => {
