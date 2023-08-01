@@ -1,13 +1,13 @@
-import { _, Button, Div } from "../../lib/tungsten/jsml";
-import { controls } from "./Controls.styles";
+import "./Controls.css";
+import { Div } from "../../lib/tungsten/jsml";
 import UxButton from "../UX/Button/Button";
 
 
 
 export default function Controls(): HTMLElement {
-    return Div(_, [
+    return Div("p-controls", [
         UxButton(() => {}, "Add"),
         UxButton(() => {}, "Import"),
         UxButton(() => {}, "Export"),
-    ], { style: controls });
+    ]);
 }

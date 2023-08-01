@@ -1,0 +1,16 @@
+.p-ux-button {
+    background-color: black;
+    color: white;
+    border: unset;
+    padding: 8px;
+    outline: 0 solid transparent;
+    border-radius: var(--p-border-radius);
+}
+
+
+
+.p-ux-button:hover {
+    outline-width: 2px;
+    outline-color: white;
+    cursor: pointer;
+}

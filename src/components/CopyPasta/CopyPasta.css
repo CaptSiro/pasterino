@@ -1,0 +1,31 @@
+.p-copy-pasta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    border-radius: var(--p-border-radius);
+    width: 100%;
+    overflow: hidden;
+}
+
+.p-copy-pasta:hover {
+    cursor: pointer;
+}
+
+.p-copy-pasta.selected {
+    background-color: #334;
+}
+
+
+
+.p-copy-pasta span {
+    white-space: nowrap;
+}
+
+.p-copy-pasta.selected .p-content {
+    font-weight: bolder;
+}
+
+.p-search {
+    font-size: 0.7em;
+}

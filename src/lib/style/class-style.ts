@@ -6,6 +6,10 @@ import { createCSSString } from "../tungsten/jsml";
 
 const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
+        if (mutation.attributeName !== "class") {
+            continue;
+        }
+
         const t = mutation.target;
 
         if (!(t instanceof HTMLElement) || t.dataset.csClass === undefined) {
@@ -15,11 +19,11 @@ const observer = new MutationObserver((mutations) => {
         const cssClass = t.dataset.csClass!;
 
         if (t.classList.contains(cssClass)) {
-            t.setAttribute("style", t.dataset.csBase!);
+            t.setAttribute("style", t.dataset.csStyle!);
             continue;
         }
 
-        t.setAttribute("style", t.dataset.csStyle!);
+        t.setAttribute("style", t.dataset.csBase!);
     }
 });
 

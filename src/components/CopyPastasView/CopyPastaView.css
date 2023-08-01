@@ -1,0 +1,13 @@
+.p-copy-pasta-view-wrapper {
+    overflow: auto;
+}
+
+
+
+.p-copy-pasta-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: auto;
+    gap: 4px;
+}

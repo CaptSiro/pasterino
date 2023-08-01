@@ -1,9 +1,6 @@
+import "./Pasterino.css";
 import { Div } from "../../lib/tungsten/jsml";
-import { $ } from "../../lib/tungsten/domx";
 import { Keyboard } from "../../lib/Keyboard";
-import { Styles } from "../../@types";
-import mergeStyles from "../../lib/style/merge-styles";
-import { pasterinoStyles } from "./Pasterino.styles";
 import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
 import Platform from "../../platform/Platform";
@@ -13,12 +10,17 @@ import isVisible, { toggleWidgetVisibility } from "./widget-visibility";
 
 
 export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
-    const position = calculatePosition(chatInput.getBoundingClientRect()) as Styles;
+    const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
 
     const widget = Div("pasterino-root", [
         Controls(),
         CopyPastaView()
-    ], { style: mergeStyles(pasterinoStyles, position) });
+    ]);
+
+
+
+    widget.style.setProperty("--bottom", bottom);
+    widget.style.setProperty("--right", right);
 
 
 

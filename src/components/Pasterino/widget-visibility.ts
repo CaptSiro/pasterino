@@ -1,4 +1,5 @@
-import { invisibleDisplayValue, visibleDisplayValue } from "./Pasterino.styles";
+export const visibleDisplayValue = "flex";
+export const invisibleDisplayValue = "none";
 
 
 
