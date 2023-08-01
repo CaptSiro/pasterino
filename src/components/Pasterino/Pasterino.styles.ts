@@ -14,5 +14,5 @@ export const pasterinoStyles: Styles = {
     padding: "16px",
     borderRadius,
     width: "300px",
-    height: "188px"
+    height: "50vh"
 }

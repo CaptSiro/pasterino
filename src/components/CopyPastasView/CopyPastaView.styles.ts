@@ -9,3 +9,7 @@ export const copyPastaViewStyles: Styles = {
     overflow: "auto",
     gap: "4px",
 }
+
+export const copyPastaViewWrapper: Styles = {
+    overflow: "auto"
+}
