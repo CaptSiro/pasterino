@@ -1,15 +1,14 @@
 import { Div } from "../../lib/tungsten/jsml";
 import { $ } from "../../lib/tungsten/domx";
 import { Keyboard } from "../../lib/Keyboard";
-import isVisible from "../../lib/isVisible";
 import { Styles } from "../../@types";
-import mergeStyles from "../../lib/style/mergeStyles";
+import mergeStyles from "../../lib/style/merge-styles";
 import { pasterinoStyles } from "./Pasterino.styles";
 import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
 import Platform from "../../platform/Platform";
 import { url } from "../../lib/location-listener";
-import { toggleWidgetVisibility } from "./widget-visibility";
+import isVisible, { toggleWidgetVisibility } from "./widget-visibility";
 
 
 

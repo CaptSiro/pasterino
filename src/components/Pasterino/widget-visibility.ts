@@ -1,4 +1,4 @@
-import { $ } from "../../lib/tungsten/domx";
+import { invisibleDisplayValue, visibleDisplayValue } from "./Pasterino.styles";
 
 
 
@@ -13,7 +13,7 @@ export function toggleWidgetVisibility(widget: HTMLElement, force?: boolean): vo
         return;
     }
 
-    if (widget.style.display === "none") {
+    if (widget.style.display === invisibleDisplayValue) {
         showWidget(widget);
     } else {
         hideWidget(widget);
@@ -23,11 +23,17 @@ export function toggleWidgetVisibility(widget: HTMLElement, force?: boolean): vo
 
 
 export function hideWidget(widget: HTMLElement): void {
-    widget.style.display = "none";
+    widget.style.display = invisibleDisplayValue;
 }
 
 
 
 export function showWidget(widget: HTMLElement): void {
-    widget.style.display = "flex";
+    widget.style.display = visibleDisplayValue;
+}
+
+
+
+export default function isVisible(widget: HTMLElement): boolean {
+    return getComputedStyle(widget).display === visibleDisplayValue;
 }

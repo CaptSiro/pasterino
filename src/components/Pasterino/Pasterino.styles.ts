@@ -3,6 +3,11 @@ import { borderRadius } from "../Root.styles";
 
 
 
+export const visibleDisplayValue = "flex";
+export const invisibleDisplayValue = "none";
+
+
+
 export const pasterinoStyles: Styles = {
     position: "fixed",
     backgroundColor: "#223",
