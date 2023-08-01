@@ -5,10 +5,13 @@ import isVisible from "../widget-visibility";
 
 
 export default function arrowDownNext(widget: HTMLElement, selector: Selector): KeyboardRegister["onPress"] {
-    return () => {
+    return (evt) => {
         if (!isVisible(widget)) {
             return;
         }
+
+        evt.preventDefault();
+        evt.stopPropagation();
 
         selector.next();
     };
