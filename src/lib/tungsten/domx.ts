@@ -1,9 +1,9 @@
-export function $(css: string): Element | null {
-    return document.querySelector(css);
+export function $<T extends Element = Element>(css: string): T | null {
+    return document.querySelector<T>(css);
 }
 
-export function $$(css: string): NodeListOf<Element> {
-    return document.querySelectorAll(css);
+export function $$<T extends Element = Element>(css: string): NodeListOf<T> {
+    return document.querySelectorAll<T>(css);
 }
 
 export function untilElement(selector: string): Promise<Element | null> {
