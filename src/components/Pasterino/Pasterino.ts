@@ -5,16 +5,23 @@ import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
 import Platform from "../../platform/Platform";
 import { url } from "../../lib/location-listener";
-import isVisible, { toggleWidgetVisibility } from "./widget-visibility";
+import { toggleWidgetVisibility } from "./widget-visibility";
+import Selector from "../../lib/Selector";
+import ctrlSpaceVisibility from "./registers/ctrl-space-visibility";
+import enterSubmit from "./registers/enter-submit";
+import shiftDeleteRemove from "./registers/shift-delete-remove";
+import arrowUpPrevious from "./registers/arrow-up-previous";
+import arrowDownNext from "./registers/arrow-down-next";
 
 
 
 export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
+    const selector = new Selector();
     const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
 
     const widget = Div("pasterino-root", [
         Controls(),
-        CopyPastaView()
+        CopyPastaView(selector)
     ]);
 
 
@@ -42,44 +49,25 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
         .register({
             key: " ",
             modifiers: ["ctrl"],
-            onPress: () => {
-                if (isVisible(widget)) {
-                    widget.style.display = "none";
-                    return;
-                }
-
-                widget.style.display = "flex";
-            }
+            onPress: ctrlSpaceVisibility(widget)
         })
         .register({
             key: "Enter",
-            onPress: () => {
-                if (!isVisible(widget)) {
-                    return;
-                }
-
-                // set selected copy pasta
-            }
+            onPress: enterSubmit(widget, selector, platform)
         })
         .register({
             key: "Delete",
             modifiers: ["shift"],
-            onPress: () => {
-                console.log("remove copy-pasta");
-            }
+            onPress: shiftDeleteRemove(widget, selector)
         })
         .register({
             key: "ArrowUp",
-            onPress: () => {
-                console.log("previous copy-pasta");
-            }
+            onPress: arrowUpPrevious(widget, selector)
         })
         .register({
             key: "ArrowDown",
-            onPress: () => {
-                console.log("next copy-pasta");
-            }
-        })
+            onPress: arrowDownNext(widget, selector)
+        });
 
     chatInput.removeEventListener("keydown", middleware.eventHandler, { capture: true });
     chatInput.addEventListener("keydown", middleware.eventHandler, { capture: true });
@@ -103,7 +91,8 @@ function calculatePosition(rect: DOMRect): { readonly bottom: string, readonly r
 function onResize(widget: HTMLElement, chatInput: HTMLElement) {
     return () => {
         const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
-        widget.style.bottom = bottom;
-        widget.style.right = right;
+
+        widget.style.setProperty("--bottom", bottom);
+        widget.style.setProperty("--right", right);
     };
 }

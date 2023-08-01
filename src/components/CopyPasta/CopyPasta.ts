@@ -2,25 +2,33 @@ import "./CopyPasta.css";
 import { CopyPasta } from "../../@types";
 import { _, Div, Span } from "../../lib/tungsten/jsml";
 import { $$ } from "../../lib/tungsten/domx";
+import Selector, { SELECTOR_TOKEN } from "../../lib/Selector";
+import { TokenNamespace } from "../../lib/tungsten/token";
 
 
 
-export default function CopyPasta(cp: CopyPasta): HTMLElement {
+const namespace = new TokenNamespace();
+
+
+
+export default function CopyPasta(copyPasta: CopyPasta, selector: Selector): HTMLElement {
     const container = Div("p-copy-pasta", [
-        Span("p-content", cp.content),
-        Span("p-keywords", cp.keywords.join(", "))
-    ]);
+        Span("p-content", copyPasta.content),
+        Span("p-keywords", copyPasta.keywords.join(", "))
+    ], {
+        [SELECTOR_TOKEN]: namespace.create(),
+    });
 
 
 
     container.addEventListener("pointerenter", () => {
-        const selected = $$<HTMLElement>(".p-copy-pasta.selected");
+        const token = container.dataset.token;
 
-        for (let i = 0; i < selected.length; i++) {
-            selected[i].classList.remove("selected");
+        if (token === undefined) {
+            return;
         }
 
-        container.classList.add("selected");
+        selector.select(token);
     });
 
 
