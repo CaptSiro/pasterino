@@ -12,6 +12,7 @@ import enterSubmit from "./registers/enter-submit";
 import shiftDeleteRemove from "./registers/shift-delete-remove";
 import arrowUpPrevious from "./registers/arrow-up-previous";
 import arrowDownNext from "./registers/arrow-down-next";
+import escapeHide from "./registers/escape-hide";
 
 
 
@@ -50,6 +51,10 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
             key: " ",
             modifiers: ["ctrl"],
             onPress: ctrlSpaceVisibility(widget)
+        })
+        .register({
+            key: "Escape",
+            onPress: escapeHide(widget)
         })
         .register({
             key: "Enter",
