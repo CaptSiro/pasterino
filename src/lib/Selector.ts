@@ -65,6 +65,8 @@ export default class Selector {
     }
 
     setParent(parent: HTMLElement) {
+        this.parent = parent;
+
         for (let i = 0; i < this.constructorItems.length; i++) {
             const copyPasta = this.constructorItems[i];
             const element = CopyPastaItem(copyPasta, this);
