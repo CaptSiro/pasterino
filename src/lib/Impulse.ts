@@ -1,12 +1,20 @@
-export type ImpulseListener<T> = (arg: T) => any;
+export type ImpulseListener<T> = (value: T) => any;
+
+
+
+export type ImpulseOptions = {
+  pulseOnDuplicate?: boolean
+}
 
 
 
 export default class Impulse<T = void> {
+  private lastValue: T | undefined;
   private readonly listeners: ImpulseListener<T>[];
 
-  constructor() {
+  constructor(private readonly options?: ImpulseOptions | undefined) {
     this.listeners = [];
+    this.lastValue = undefined;
   }
 
   listen(listener: ImpulseListener<T>): void {
@@ -23,9 +31,15 @@ export default class Impulse<T = void> {
     this.listeners.splice(i, 1);
   }
 
-  pulse(arg: T): void {
+  pulse(value: T): void {
+    if (this.options?.pulseOnDuplicate === false && value === this.lastValue) {
+      return;
+    }
+
+    this.lastValue = value;
+
     for (let i = 0; i < this.listeners.length; i++) {
-      this.listeners[i](arg);
+      this.listeners[i](value);
     }
   }
 }
