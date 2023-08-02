@@ -8,6 +8,10 @@
     overflow: hidden;
 }
 
+.p-copy-pasta[data-p-selector-ignore] {
+    display: none;
+}
+
 .p-copy-pasta:hover {
     cursor: pointer;
 }
@@ -26,6 +30,6 @@
     font-weight: bolder;
 }
 
-.p-search {
+.p-tags {
     font-size: 0.7em;
 }

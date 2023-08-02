@@ -10,6 +10,6 @@ export default function shiftDeleteRemove(widget: HTMLElement, selector: Selecto
             return;
         }
 
-        console.log("remove", selector.getSelected());
+        console.log("remove", selector.current?.copyPasta);
     };
 }

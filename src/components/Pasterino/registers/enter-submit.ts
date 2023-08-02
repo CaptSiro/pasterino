@@ -6,18 +6,20 @@ import Platform from "../../../platform/Platform";
 
 
 export default function enterSubmit(widget: HTMLElement, selector: Selector, platform: Platform): KeyboardRegister["onPress"] {
-    return () => {
+    return (evt) => {
         if (!isVisible(widget)) {
             return;
         }
 
         hideWidget(widget);
 
-        const content = selector.getSelected()
-            ?.querySelector(".p-content")
-            ?.textContent ?? undefined;
+        const content = selector.current?.copyPasta.content;
 
         if (content === undefined) {
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+
+            //todo pop error notification "No copypastas o.O"
             return;
         }
 

@@ -2,7 +2,9 @@ import Impulse from "./Impulse";
 
 
 
-export const url = new Impulse<string>();
+export const url = new Impulse<string>({
+    pulseOnDuplicate: false
+});
 
 
 

@@ -13,11 +13,16 @@ import shiftDeleteRemove from "./registers/shift-delete-remove";
 import arrowUpPrevious from "./registers/arrow-up-previous";
 import arrowDownNext from "./registers/arrow-down-next";
 import escapeHide from "./registers/escape-hide";
+import { store } from "../../main";
+import usePrompt from "../../hooks/use-prompt";
 
 
 
 export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
-    const selector = new Selector();
+    const prompt = usePrompt(platform);
+
+    const selector = new Selector(store.getAll(), Div("p-copy-pasta-view"), prompt);
+
     const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
 
     const widget = Div("pasterino-root", [
@@ -86,7 +91,6 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
 
     window.removeEventListener("keydown", outsideEventHandler);
     window.addEventListener("keydown", outsideEventHandler);
-
 
 
 
