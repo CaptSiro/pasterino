@@ -13,6 +13,10 @@ type ChatInput = {
 
 
 export default class TwitchPlatform implements Platform {
+    getPromptElement(): HTMLElement | undefined {
+        return document.querySelector<HTMLElement>('[data-a-target="chat-input"][contenteditable=true]') ?? undefined;
+    }
+
     setChatInput(data: string): void {
         this.getChatInputReact()?.props.onChange({
             target: { value: data }
