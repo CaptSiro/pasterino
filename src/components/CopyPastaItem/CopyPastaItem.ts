@@ -2,6 +2,7 @@ import "./CopyPastaItem.css";
 import { CopyPasta } from "../../@types";
 import { _, Div, Span } from "../../lib/tungsten/jsml";
 import Selector from "../../lib/Selector";
+import KeyCap from "../KeyCap/KeyCap";
 
 
 
@@ -12,7 +13,10 @@ export const ATTR_COPY_PASTA_ID = "data-copy-pasta-id";
 export default function CopyPastaItem(copyPasta: CopyPasta, selector: Selector): HTMLElement {
     const container = Div("p-copy-pasta", [
         Span("p-content", copyPasta.content),
-        Span("p-tags", copyPasta.tags.join(", "))
+        Span("p-tags", copyPasta.tags.join(", ")),
+        Div("p-abs",
+            KeyCap("Enter", "long")
+        )
     ], {
         [ATTR_COPY_PASTA_ID]: String(copyPasta.id)
     });

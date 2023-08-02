@@ -1,7 +1,6 @@
 import "./Pasterino.css";
-import { Div } from "../../lib/tungsten/jsml";
+import { _, Div } from "../../lib/tungsten/jsml";
 import { Keyboard } from "../../lib/Keyboard";
-import Controls from "../Controls/Controls";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
 import Platform from "../../platform/Platform";
 import { url } from "../../lib/location-listener";
@@ -15,6 +14,7 @@ import arrowDownNext from "./registers/arrow-down-next";
 import escapeHide from "./registers/escape-hide";
 import { store } from "../../main";
 import usePrompt from "../../hooks/use-prompt";
+import SelfPromo from "../SelfPromo";
 
 
 
@@ -25,7 +25,7 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
 
 
     const widget = Div("pasterino-root", [
-        Controls(),
+        SelfPromo(),
         CopyPastaView(selector)
     ]);
 

@@ -1,19 +1,27 @@
 .pasterino-root {
+    --p-bg: #18181b;
+    --p-bg-active: #37373a;
+    --p-primary: #9147ff;
+    --p-primary-active: #772ce8;
+    --p-text-color: #fff;
+
+    background-color: var(--p-bg-active);
+    color: var(--p-text-color);
+
     --p-border-radius: 4px;
+    --p-border-radius-container: 8px;
     --bottom: 0;
     --right: 0;
 
     position: fixed;
     bottom: var(--bottom);
     right: var(--right);
-    background-color: #223;
-    color: white;
     z-index: 100000;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-    border-radius: var(--p-border-radius);
+    gap: 4px;
+    padding: 4px;
+    border-radius: var(--p-border-radius-container);
     width: 300px;
     height: 50vh;
 }

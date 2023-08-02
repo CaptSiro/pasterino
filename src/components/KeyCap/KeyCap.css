@@ -1,0 +1,26 @@
+.p-key-cap {
+    background-color: var(--p-text-color);
+    border-radius: 8px;
+    width: fit-content;
+    padding: 2px 4px 8px 4px;
+}
+
+.p-key-cap-inner {
+    padding: 4px;
+    font-size: 0.7em;
+    border-radius: 4px;
+    background-color: var(--p-bg);
+    text-align: center;
+}
+
+.p-key-cap.letter .p-key-cap-inner {
+    width: 2em;
+}
+
+.p-key-cap.long .p-key-cap-inner {
+    width: 64px;
+}
+
+.p-key-cap.extra-long .p-key-cap-inner {
+    width: 128px;
+}

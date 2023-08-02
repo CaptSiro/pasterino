@@ -1,16 +1,13 @@
 .p-ux-button {
-    background-color: black;
-    color: white;
+    background-color: var(--p-primary);
+    color: var(--p-text-color);
     border: unset;
-    padding: 8px;
-    outline: 0 solid transparent;
+    padding: 8px 10px;
+    height: 30px;
     border-radius: var(--p-border-radius);
 }
 
-
-
 .p-ux-button:hover {
-    outline-width: 2px;
-    outline-color: white;
+    background-color: var(--p-primary-active);
     cursor: pointer;
 }
