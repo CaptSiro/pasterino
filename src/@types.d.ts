@@ -8,6 +8,11 @@ export type CopyPasta = {
     tags: string[],
 }
 
+export type Tag = {
+    name: string,
+    exclude: boolean
+}
+
 export type Styles = Partial<CSSStyleDeclaration>
 
 export type Component<T> = (props: T) => HTMLElement

@@ -1,11 +1,12 @@
 import scrollIntoViewIfNeeded from "./tungsten/scroll-if-needed";
-import { CopyPasta } from "../@types";
-import CopyPastaItem, { deselect, isSelected, select } from "../components/CopyPastaItem/CopyPastaItem";
+import { CopyPasta, Tag } from "../@types";
+import CopyPastaItem, { deselect, select } from "../components/CopyPastaItem/CopyPastaItem";
 import Impulse from "./Impulse";
 import { SearchParser } from "./search-parser/SearchParser";
 import { equalsSymbols, list } from "./search-parser/validators";
-import { SearchQuerySuccess } from "./search-parser/@search-types";
 import stringCompare from "./string-compare";
+import collectTags from "./tags/collect-tags";
+import tagsCompare from "./tags/tags-compare";
 
 
 
@@ -173,9 +174,9 @@ export default class Selector {
                 continue;
             }
 
-            const tags: Tag[] = this.collectTags(result);
+            const tags = collectTags(result);
 
-            if (!tagsFilter(item.copyPasta.tags, tags)) {
+            if (!tagsCompare(item.copyPasta.tags, tags)) {
                 deselect(item.element);
                 Selector.ignore(item.element);
                 continue;
@@ -196,29 +197,6 @@ export default class Selector {
         }
     }
 
-    private collectTags(result: SearchQuerySuccess): Tag[] {
-        const tags: Tag[] = [];
-
-        for (const name in result.properties) {
-            for (let j = 0; j < result.properties[name].length; j++) {
-                const prop = result.properties[name][j];
-
-                if (!(prop.value instanceof Array)) {
-                    continue;
-                }
-
-                for (let k = 0; k < prop.value.length; k++) {
-                    tags.push({
-                        name: prop.value[k],
-                        exclude: prop.symbol === "!="
-                    });
-                }
-            }
-        }
-
-        return tags;
-    }
-
 
 
     static ignore(element: HTMLElement): void {
@@ -228,47 +206,4 @@ export default class Selector {
     static acknowledge(element: HTMLElement): void {
         element.removeAttribute(ATTR_SELECTOR_IGNORE);
     }
-}
-
-
-
-type Tag = {
-    name: string,
-    exclude: boolean
-}
-
-function tagsFilter(tagsOnItem: string[], tags: Tag[]): boolean {
-    if (tagsOnItem.length === 0 || tags.length === 0) {
-        return true;
-    }
-
-    let mustHaveCount = 0;
-    let actuallyHasCount = 0;
-
-    for (let i = 0; i < tags.length; i++) {
-        let includesTag = false;
-
-        for (let j = 0; j < tagsOnItem.length; j++) {
-            if (stringCompare(tags[i].name, tagsOnItem[j])) {
-                includesTag = true;
-                break;
-            }
-        }
-
-        if (tags[i].exclude) {
-            if (includesTag) {
-                return false;
-            }
-
-            continue;
-        }
-
-        mustHaveCount++;
-
-        if (includesTag) {
-            actuallyHasCount++;
-        }
-    }
-
-    return mustHaveCount === actuallyHasCount;
 }
