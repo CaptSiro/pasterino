@@ -1,5 +1,5 @@
 import scrollIntoViewIfNeeded from "./tungsten/scroll-if-needed";
-import { CopyPasta, Tag } from "../@types";
+import { CopyPasta } from "../@types";
 import CopyPastaItem, { deselect, select } from "../components/CopyPastaItem/CopyPastaItem";
 import Impulse from "./Impulse";
 import { SearchParser } from "./search-parser/SearchParser";
@@ -7,6 +7,7 @@ import { equalsSymbols, list } from "./search-parser/validators";
 import stringCompare from "./string-compare";
 import collectTags from "./tags/collect-tags";
 import tagsCompare from "./tags/tags-compare";
+import wordGenerator from "./word-generator";
 
 
 
@@ -31,7 +32,6 @@ export default class Selector {
     private size: number;
     private pointer: number;
     private readonly items: SelectorItem[];
-    private readonly constructorItems: CopyPasta[];
     private selected: SelectorItem | undefined;
     private parent: HTMLElement | undefined;
 
@@ -41,19 +41,19 @@ export default class Selector {
         return this.selected;
     }
 
-    get container(): HTMLElement {
-        this.assertParentDefined();
-
-        return this.parent!;
-    }
-
 
 
     constructor(items: CopyPasta[], private readonly prompt: Impulse<string>) {
         this.items = [];
         this.size = 0;
         this.pointer = 0;
-        this.constructorItems = items;
+
+        for (let i = 0; i < items.length; i++) {
+            this.items.push({
+                copyPasta: items[i],
+                element: CopyPastaItem(items[i], this)
+            });
+        }
     }
 
 
@@ -67,16 +67,8 @@ export default class Selector {
     setParent(parent: HTMLElement) {
         this.parent = parent;
 
-        for (let i = 0; i < this.constructorItems.length; i++) {
-            const copyPasta = this.constructorItems[i];
-            const element = CopyPastaItem(copyPasta, this);
-
-            parent.append(element);
-
-            this.items.push({
-                copyPasta,
-                element
-            });
+        for (let i = 0; i < this.items.length; i++) {
+            this.parent.append(this.items[i].element);
         }
 
         this.size = this.items.length;
@@ -188,14 +180,13 @@ export default class Selector {
         this.selected = undefined;
         this.pointer = 0;
 
-        const common = result.unnamed.join("");
         let firstToPass = -1;
         this.size = 0;
 
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
 
-            if (!stringCompare(common, item.copyPasta.content)) {
+            if (!Selector.compareContent(result.unnamed, item.copyPasta.content)) {
                 deselect(item.element);
                 Selector.ignore(item.element);
                 continue;
@@ -222,6 +213,28 @@ export default class Selector {
             this.pointer = firstToPass;
             this.selected = this.items[this.pointer];
         }
+    }
+
+
+
+    static compareContent(patterns: string[], content: CopyPasta["content"]): boolean {
+        if (patterns.length === 0 || content.length === 0) {
+            return true;
+        }
+
+        let patternPtr = 0;
+
+        for (const word of wordGenerator(content.toLowerCase())) {
+            if (stringCompare(patterns[patternPtr].toLowerCase(), word)) {
+                patternPtr++;
+            }
+
+            if (patternPtr === patterns.length) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
