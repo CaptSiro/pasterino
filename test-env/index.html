@@ -92,6 +92,12 @@
                     if (evt.key === "Enter" && !evt.ctrlKey && !evt.altKey && !evt.shiftKey) {
                         const msg = document.createElement("div");
                         msg.textContent = chat.textContent.trim();
+
+                        if (msg.textContent.length > 500)  {
+                            alert("Message must be under 500 characters long");
+                            return;
+                        }
+
                         chat.textContent = "";
                         messages.append(msg);
                         chat.focus();
