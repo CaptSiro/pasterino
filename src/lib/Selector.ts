@@ -1,4 +1,4 @@
-import scrollIntoViewIfNeeded from "./tungsten/scroll-if-needed";
+import scrollIfNeeded from "./tungsten/scroll-if-needed";
 import { CopyPasta } from "../@types";
 import CopyPastaItem, { deselect, select } from "../components/CopyPastaItem/CopyPastaItem";
 import Impulse from "./Impulse";
@@ -155,7 +155,7 @@ export default class Selector {
             break;
         } while (true);
 
-        scrollIntoViewIfNeeded(this.items[this.pointer].element, this.parent!);
+        scrollIfNeeded(this.items[this.pointer].element, this.parent!);
     }
 
 

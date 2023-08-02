@@ -12,8 +12,10 @@ export const ATTR_COPY_PASTA_ID = "data-copy-pasta-id";
 
 export default function CopyPastaItem(copyPasta: CopyPasta, selector: Selector): HTMLElement {
     const container = Div("p-copy-pasta", [
-        Span("p-content", copyPasta.content),
-        Span("p-tags", copyPasta.tags.join(", ")),
+        Div("p-copy-pasta-content", [
+            Span("p-content", copyPasta.content),
+            Span("p-tags", copyPasta.tags.join(", ")),
+        ]),
         Div("p-abs",
             KeyCap("Enter", "long")
         )

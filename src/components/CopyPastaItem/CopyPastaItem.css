@@ -1,10 +1,14 @@
 .p-copy-pasta {
     position: relative;
+    padding: 16px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.p-copy-pasta-content {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 16px;
-    width: 100%;
     overflow: hidden;
     background-color: transparent;
 }

@@ -1,18 +1,22 @@
 .p-copy-pasta-view-wrapper {
-    overflow: auto;
+    overflow: hidden;
+    position: relative;
     border-radius: var(--p-border-radius-container);
     background-color: var(--p-bg);
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.p-copy-pasta-view-wrapper::-webkit-scrollbar {
-    display: none;
 }
 
 
 
 .p-copy-pasta-view {
+    height: 100%;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     flex: 1;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.p-copy-pasta-view::-webkit-scrollbar {
+    display: none;
 }
