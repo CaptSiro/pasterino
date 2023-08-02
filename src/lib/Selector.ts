@@ -31,23 +31,42 @@ export default class Selector {
     private size: number;
     private pointer: number;
     private readonly items: SelectorItem[];
+    private readonly constructorItems: CopyPasta[];
     private selected: SelectorItem | undefined;
+    private parent: HTMLElement | undefined;
+
+
 
     get current(): SelectorItem | undefined {
         return this.selected;
     }
 
     get container(): HTMLElement {
-        return this.parent;
+        this.assertParentDefined();
+
+        return this.parent!;
     }
 
 
 
-    constructor(items: CopyPasta[], private readonly parent: HTMLElement, private readonly prompt: Impulse<string>) {
+    constructor(items: CopyPasta[], private readonly prompt: Impulse<string>) {
         this.items = [];
+        this.size = 0;
+        this.pointer = 0;
+        this.constructorItems = items;
+    }
 
-        for (let i = 0; i < items.length; i++) {
-            const copyPasta = items[i];
+
+
+    assertParentDefined() {
+        if (this.parent === undefined) {
+            throw new Error("Can not use this object until parent is defined");
+        }
+    }
+
+    setParent(parent: HTMLElement) {
+        for (let i = 0; i < this.constructorItems.length; i++) {
+            const copyPasta = this.constructorItems[i];
             const element = CopyPastaItem(copyPasta, this);
 
             parent.append(element);
@@ -74,6 +93,8 @@ export default class Selector {
 
 
     select(id: number): void {
+        this.assertParentDefined();
+
         const i = this.items.findIndex(i => i.copyPasta.id === id);
 
         if (i === -1) {
@@ -84,6 +105,8 @@ export default class Selector {
     }
 
     private selectByIndex(i: number): void {
+        this.assertParentDefined();
+
         const item = this.items[i];
 
         if (item === undefined || item.element.hasAttribute(ATTR_SELECTOR_IGNORE)) {
@@ -119,6 +142,8 @@ export default class Selector {
     }
 
     private scroll(movePointer: () => void): void {
+        this.assertParentDefined();
+
         if (this.size === 0 || this.size === 1) {
             return;
         }
@@ -136,7 +161,7 @@ export default class Selector {
             break;
         } while (true);
 
-        scrollIntoViewIfNeeded(this.items[this.pointer].element, this.parent);
+        scrollIntoViewIfNeeded(this.items[this.pointer].element, this.parent!);
     }
 
 
@@ -150,7 +175,7 @@ export default class Selector {
             return;
         }
 
-        for (const child of this.parent.children) {
+        for (const child of this.parent!.children) {
             if (!(child instanceof HTMLElement)) {
                 continue;
             }

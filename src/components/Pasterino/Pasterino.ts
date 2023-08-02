@@ -20,10 +20,9 @@ import usePrompt from "../../hooks/use-prompt";
 
 export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
     const prompt = usePrompt(platform);
+    const selector = new Selector(store.getAll(), prompt);
 
-    const selector = new Selector(store.getAll(), Div("p-copy-pasta-view"), prompt);
 
-    const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
 
     const widget = Div("pasterino-root", [
         Controls(),
@@ -31,6 +30,8 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
     ]);
 
 
+
+    const { bottom, right } = calculatePosition(chatInput.getBoundingClientRect());
 
     widget.style.setProperty("--bottom", bottom);
     widget.style.setProperty("--right", right);

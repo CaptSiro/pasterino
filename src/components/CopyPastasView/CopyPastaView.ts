@@ -5,7 +5,11 @@ import Selector from "../../lib/Selector";
 
 
 export default function CopyPastaView(selector: Selector): HTMLElement {
+    const view = Div("p-copy-pasta-view");
+
+    selector.setParent(view);
+
     return (
-        Div("p-copy-pasta-view-wrapper", selector.container)
+        Div("p-copy-pasta-view-wrapper", view)
     );
 }
