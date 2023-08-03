@@ -24,4 +24,6 @@
     border-radius: var(--p-border-radius-container);
     width: 300px;
     height: 50vh;
+
+    user-select: none;
 }

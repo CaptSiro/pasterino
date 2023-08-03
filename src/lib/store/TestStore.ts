@@ -14,6 +14,10 @@ export default class TestStore implements Store {
             tags: ["azer", "isnt", "so", "great", "rafis", "cookiezi"],
             content: "Azer isn't so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet? Alex puts the game in another level, and we will be blessed if we ever see a player with his skill and passion for the game again. Cookiezi breaks records. Rafis breaks records. Azer breaks the rules. You can keep your statistics. I prefer the magic."
         }, {
+            id: 69,
+            tags: ["hitting", "expect", "change", "perception"],
+            content: "Okay u are just hitting things i would not expect you to hit idk if today is godmode or if i should change my perception of you"
+        }, {
             id: 3,
             tags: ["btmc", "edward", "ling"],
             content: "Edward \"BTMC\" Ling is well known within the rhythm game \"osu!\" as one of it's largest content creators both on YouTube and Twitch. After joining the game in 2013, what started as a casual game to pass the time eventually turned into a competitive grind to become one of the best. BTMC is no stranger to eSports. After reaching the top 100 in 2018, he set his sights towards the osu! World Cup; the largest official tournament within the game."

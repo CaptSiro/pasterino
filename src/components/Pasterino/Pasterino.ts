@@ -18,13 +18,17 @@ import SelfPromo from "../SelfPromo";
 
 
 
+export const CLASS_PASTERINO_WIDGET = "pasterino-root";
+
+
+
 export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
     const prompt = usePrompt(platform);
     const selector = new Selector(store.getAll(), prompt);
 
 
 
-    const widget = Div("pasterino-root", [
+    const widget = Div(CLASS_PASTERINO_WIDGET, [
         SelfPromo(),
         CopyPastaView(selector)
     ]);

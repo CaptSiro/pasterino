@@ -5,6 +5,11 @@
     padding: 2px 4px 8px 4px;
 }
 
+.p-key-cap.pressed {
+    padding-bottom: 4px;
+    margin-top: 4px;
+}
+
 .p-key-cap-inner {
     padding: 4px;
     font-size: 0.7em;
@@ -15,6 +20,10 @@
 
 .p-key-cap.letter .p-key-cap-inner {
     width: 2em;
+}
+
+.p-key-cap.medium .p-key-cap-inner {
+    width: 48px;
 }
 
 .p-key-cap.long .p-key-cap-inner {

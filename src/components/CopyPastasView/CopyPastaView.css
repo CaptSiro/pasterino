@@ -1,4 +1,6 @@
 .p-copy-pasta-view-wrapper {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     position: relative;
     border-radius: var(--p-border-radius-container);
