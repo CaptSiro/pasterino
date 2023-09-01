@@ -3,7 +3,7 @@ import { Component, ComponentContent, ComponentOptions } from "../../../lib/tung
 
 
 
-export default function UxButton(action: (evt: MouseEvent) => any, content: ComponentContent, options: ComponentOptions = {}): HTMLElement {
+export default function UIButton(action: (evt: MouseEvent) => any, content: ComponentContent, options: ComponentOptions = {}): HTMLElement {
     options.onPointerDown = action;
     return Component("button", "p-ux-button", content, options);
 }
