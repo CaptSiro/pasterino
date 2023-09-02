@@ -3,6 +3,6 @@ import TestStore from "./TestStore";
 
 
 
-export default function getDefaultStore(): Store {
+export default function getStore(): Store {
     return new TestStore();
 }

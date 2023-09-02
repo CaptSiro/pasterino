@@ -1,4 +1,4 @@
-import getDefaultStore from "./lib/store/get-default-store";
+import getStore from "./lib/store/get-store";
 import Pasterino from "./components/Pasterino/Pasterino";
 import { $ } from "./lib/tungsten/domx";
 import getPlatform from "./platform/get-platform";
@@ -6,7 +6,7 @@ import bindLocationListener from "./lib/location-listener";
 
 
 
-export const store = getDefaultStore();
+export const store = getStore();
 
 
 
@@ -35,8 +35,16 @@ async function main(evt: KeyboardEvent) {
 
 
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
     window.addEventListener("keydown", main);
 
     bindLocationListener();
+
+    const r = await fetch("http://localhost/pasterino-server/auth/set-cookie?s=" + localStorage.getItem("s"), {
+        method: "get",
+        credentials: "include"
+    });
+
+    const cookies = await r.json();
+    console.log("set cookie", cookies);
 }, { once: true });
