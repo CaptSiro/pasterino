@@ -1,11 +1,11 @@
 import { KeyboardRegister } from "../../../lib/Keyboard";
 import isVisible, { hideWidget } from "../widget-visibility";
 import Selector from "../../../lib/Selector";
-import Platform from "../../../platform/Platform";
+import getPlatform from "../../../platform/get-platform";
 
 
 
-export default function enterSubmit(widget: HTMLElement, selector: Selector, platform: Platform): KeyboardRegister["onPress"] {
+export default function enterSubmit(widget: HTMLElement, selector: Selector): KeyboardRegister["onPress"] {
     return (evt) => {
         if (!isVisible(widget)) {
             return;
@@ -23,6 +23,6 @@ export default function enterSubmit(widget: HTMLElement, selector: Selector, pla
             return;
         }
 
-        platform.setChatInput(content);
+        getPlatform().setChatInput(content);
     };
 }

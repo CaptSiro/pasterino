@@ -1,5 +1,6 @@
 import Impulse from "../lib/Impulse";
 import Platform from "../platform/Platform";
+import getPlatform from "../platform/get-platform";
 
 
 
@@ -9,12 +10,12 @@ let boundPromptListener = false;
 
 
 
-export default function usePrompt(platform: Platform): Impulse<string> {
+export default function usePrompt(): Impulse<string> {
     if (boundPromptListener) {
         return prompt;
     }
 
-    const bindTo = platform.getPromptElement();
+    const bindTo = getPlatform().getPromptElement();
 
     if (bindTo !== undefined) {
         bindTo.addEventListener("keyup", () => {

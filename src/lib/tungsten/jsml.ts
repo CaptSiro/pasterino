@@ -21,6 +21,11 @@ type Opt<T> = T | undefined;
 export function Component<K extends keyof HTMLElementTagNameMap>(tag: K, className: Opt<string>, content: ComponentContent, options: ComponentOptions): HTMLElementTagNameMap[K];
 export function Component(tag: string, className: Opt<string>, content: ComponentContent, options: ComponentOptions): HTMLElement;
 export function Component(tag: string, className: Opt<string> = undefined, content: ComponentContent = undefined, options: ComponentOptions = {}): any {
+    if (options instanceof HTMLElement) {
+        console.error(`Can not use HTMLElement as options. Caught at: ${tag}.${className}`);
+        return document.createElement(tag);
+    }
+
     const element = document.createElement(tag);
 
     if (className !== undefined) {
