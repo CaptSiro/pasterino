@@ -1,0 +1,18 @@
+.p-ui-textarea {
+    padding: 8px;
+    outline: 2px solid var(--p-bg-active);
+    border-radius: var(--p-border-radius);
+    border: unset;
+    background-color: var(--p-bg);
+    color: var(--p-text-color);
+    margin: 4px;
+}
+
+.p-ui-textarea:hover {
+    outline-width: 4px;
+}
+
+.p-ui-textarea:focus {
+    outline-color: var(--p-primary-active);
+    outline-width: 4px;
+}
