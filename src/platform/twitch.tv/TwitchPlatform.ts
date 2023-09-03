@@ -13,6 +13,24 @@ type ChatInput = {
 
 
 export default class TwitchPlatform implements Platform {
+    getChannel(url: string | undefined): string {
+        if (url === undefined) {
+            return "";
+        }
+
+        const path = new URL(url).pathname.split("/");
+
+        for (let i = path.length - 1; i >= 0; i--) {
+            if (path[i] === "") {
+                continue;
+            }
+
+            return path[i];
+        }
+
+        return "";
+    }
+
     getPromptElement(): HTMLElement | undefined {
         return document.querySelector<HTMLElement>('[data-a-target="chat-input"][contenteditable=true]') ?? undefined;
     }

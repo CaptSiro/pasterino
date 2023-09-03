@@ -75,7 +75,7 @@
                 const location = new URL(window.location.href);
                 location.searchParams.set("c", select.value);
                 window.history.replaceState({}, select.value, location);
-                document.title = select.value;
+                document.title = "Test-env - " + select.value;
             });
         </script>
     </label>

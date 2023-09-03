@@ -7,6 +7,10 @@ export default function collectTags(result: SearchQuerySuccess): Tag[] {
     const tags: Tag[] = [];
 
     for (const name in result.properties) {
+        if (name !== "tag") {
+            continue;
+        }
+
         for (let j = 0; j < result.properties[name].length; j++) {
             const prop = result.properties[name][j];
 

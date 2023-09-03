@@ -27,4 +27,6 @@ export default function bindLocationListener(): void {
     window.addEventListener('beforeunload', () => {
         observer.disconnect();
     });
+
+    url.pulse(window.location.href);
 }

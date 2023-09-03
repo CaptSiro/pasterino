@@ -35,7 +35,7 @@ export default function Pasterino(chatInput: HTMLElement): HTMLElement {
 
 
 
-    const onLocationChange = () => toggleWidgetVisibility(widget, true);
+    const onLocationChange = () => toggleWidgetVisibility(widget, false);
 
     url.removeListener(onLocationChange);
     url.listen(onLocationChange);

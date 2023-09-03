@@ -3,12 +3,16 @@ import { CopyPasta } from "../@types";
 import CopyPastaItem, { deselect, select } from "../components/CopyPastaItem/CopyPastaItem";
 import Impulse from "./Impulse";
 import { SearchParser } from "./search-parser/SearchParser";
-import { equalsSymbols, list } from "./search-parser/validators";
+import { equalsSymbols, list, text } from "./search-parser/validators";
 import stringCompare from "./string-compare";
 import collectTags from "./tags/collect-tags";
 import tagsCompare from "./tags/tags-compare";
 import wordGenerator from "./word-generator";
 import CopyPastaViewEmpty from "../components/CopyPastasView/CopyPastaViewEmpty";
+import getChannel from "./channel/get-channel";
+import channelCompare from "./channel/channel-compare";
+import { url } from "./location-listener";
+import getPlatform from "../platform/get-platform";
 
 
 
@@ -16,7 +20,8 @@ const search = new SearchParser({
     tokenDelimiter: " ",
     relationSymbols: equalsSymbols,
     propertyMap: {
-        tag: list()
+        tag: list(),
+        channel: text()
     }
 });
 
@@ -44,8 +49,11 @@ export default class Selector {
 
 
 
-    constructor(private readonly impulse: Impulse<CopyPasta[]>, private readonly prompt: Impulse<string>) {
-        this.impulse.listen(this.render.bind(this));
+    constructor(private readonly itemsImpulse: Impulse<CopyPasta[]>, private readonly prompt: Impulse<string>) {
+        const render = this.render.bind(this);
+
+        this.itemsImpulse.listen(render);
+        url.listen(() => this.render(this.itemsImpulse.value()));
 
         this.items = [];
         this.size = 0;
@@ -97,6 +105,8 @@ export default class Selector {
         if (this.selected !== undefined) {
             select(this.selected.element);
         }
+
+        this.query(this.prompt.value() ?? "");
     }
 
 
@@ -109,7 +119,7 @@ export default class Selector {
 
     setParent(parent: HTMLElement) {
         this.parent = parent;
-        this.render(this.impulse.value());
+        this.render(this.itemsImpulse.value());
     }
 
 
@@ -215,18 +225,18 @@ export default class Selector {
         let firstToPass = -1;
         this.size = 0;
 
+        const tags = collectTags(result);
+        const channel = getChannel(result);
+        const globalChannel = getPlatform().getChannel(url.value());
+
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
 
-            if (!Selector.compareContent(result.unnamed, item.copyPasta.content)) {
-                deselect(item.element);
-                Selector.ignore(item.element);
-                continue;
-            }
+            const passesSearch = Selector.compareContent(result.unnamed, item.copyPasta.content)
+                && tagsCompare(item.copyPasta.tags, tags)
+                && channelCompare(globalChannel, item.copyPasta.channel ?? "", channel)
 
-            const tags = collectTags(result);
-
-            if (!tagsCompare(item.copyPasta.tags, tags)) {
+            if (!passesSearch) {
                 deselect(item.element);
                 Selector.ignore(item.element);
                 continue;

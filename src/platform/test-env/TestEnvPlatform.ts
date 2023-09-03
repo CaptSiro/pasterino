@@ -3,6 +3,14 @@ import Platform from "../Platform";
 
 
 export default class TestEnvPlatform implements Platform {
+    getChannel(url: string | undefined): string {
+        if (url === undefined) {
+            return "";
+        }
+
+        return new URL(url).searchParams.get("c") ?? "btmc";
+    }
+
     getPromptElement(): HTMLElement | undefined {
         return this.getChatInput();
     }
