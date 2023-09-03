@@ -5,6 +5,8 @@
     --p-primary-active: #772ce8;
     --p-text-color: #fff;
 
+    --p-color-danger: #ec395e;
+
     background-color: var(--p-bg-active);
     color: var(--p-text-color);
 

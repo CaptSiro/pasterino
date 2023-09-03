@@ -21,16 +21,20 @@ const keyLookUp: Record<string, KeyCapSize> = {
 
 
 
-export default function KeyCap(key: string, press: Impulse<boolean>): HTMLElement {
+export default function KeyCap(key: string, press?: Impulse<boolean>, color?: string): HTMLElement {
     const keyCap = (
-        Div("p-key-cap " + (keyLookUp[key.toLowerCase()] ?? "letter"),
+        Div("p-key-cap " + (keyLookUp[key.toLowerCase()] ?? "letter"), [
             Div("p-key-cap-inner", key)
-        )
+        ])
     );
 
+    if (color !== undefined) {
+        keyCap.style.setProperty("--p-key-cap-color", color);
+    }
 
 
-    press.listen(isPressed => {
+
+    press?.listen(isPressed => {
         keyCap.classList.toggle("pressed", isPressed);
     });
 

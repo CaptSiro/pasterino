@@ -40,9 +40,16 @@ export default function CopyPastaItem(copyPasta: CopyPasta, selector: Selector):
             Span("p-content", copyPasta.content),
             Span("p-tags", copyPasta.tags.join(", ")),
         ]),
-        Div("p-abs",
-            KeyCap("Enter", press)
-        )
+        Div("p-abs", [
+            Div("p-row",
+                KeyCap("Enter", press)
+            ),
+            Div("p-row", [
+                KeyCap("Shift", _, "var(--p-color-danger)"),
+                Span(_, "+", { style: { color: "var(--p-color-danger)", fontWeight: "900" } }),
+                KeyCap("Del", _, "var(--p-color-danger)")
+            ])
+        ])
     ], {
         [ATTR_COPY_PASTA_ID]: String(copyPasta.id),
         onClick,

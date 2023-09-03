@@ -27,7 +27,9 @@ export default function useShortcuts(widget: HTMLElement, selector: Selector): S
         .register({
             key: "Delete",
             modifiers: ["shift"],
-            onPress: shiftDeleteRemove(widget, selector)
+            onPress: shiftDeleteRemove(widget, selector),
+            preventDefault: true,
+            stopPropagation: true
         })
         .register({
             key: "ArrowUp",

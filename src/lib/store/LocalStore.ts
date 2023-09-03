@@ -43,6 +43,21 @@ export default class LocalStore implements Store {
         this.impulse.pulse(items);
     }
 
+    delete(id: number) {
+        const items = this.impulse.value() ?? [];
+
+        const i = items.findIndex(cp => cp.id === id);
+
+        if (i === -1) {
+            return;
+        }
+
+        items.splice(i, 1);
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        this.impulse.pulse(items);
+    }
+
     save(cp: CopyPasta[]): void {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(cp));
     }

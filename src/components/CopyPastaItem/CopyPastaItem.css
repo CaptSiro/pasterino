@@ -28,9 +28,13 @@
     width: 100%;
     height: 100%;
     padding-right: 16px;
-    justify-content: end;
-    align-items: center;
+
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    gap: 4px;
+
     background: rgb(55,55,58);
     background: linear-gradient(90deg, rgba(217,217,217,0) 0%, var(--p-bg-active) 100%);
 }
@@ -41,6 +45,14 @@
 
 .p-copy-pasta.selected .p-abs {
     display: flex;
+}
+
+.p-copy-pasta .p-abs .p-row {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 4px;
+    width: min-content;
 }
 
 
