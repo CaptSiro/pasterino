@@ -1,8 +1,10 @@
 import Store from "./Store";
-import TestStore from "./TestStore";
+import LocalStore from "./LocalStore";
 
 
+
+const store = new LocalStore();
 
 export default function getStore(): Store {
-    return new TestStore();
+    return store;
 }

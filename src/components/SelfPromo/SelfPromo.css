@@ -1,0 +1,9 @@
+.p-self-promo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-self-promo .p-controls {
+    display: flex;
+    gap: 8px;
+}

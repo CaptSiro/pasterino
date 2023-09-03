@@ -1,4 +1,3 @@
-import getStore from "./lib/store/get-store";
 import Pasterino from "./components/Pasterino/Pasterino";
 import { $ } from "./lib/tungsten/domx";
 import getPlatform from "./platform/get-platform";
@@ -6,8 +5,6 @@ import bindLocationListener from "./lib/location-listener";
 import Impulse from "./lib/Impulse";
 
 
-
-export const store = getStore();
 
 export const pasterino = new Impulse<HTMLElement>();
 

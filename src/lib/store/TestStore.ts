@@ -1,9 +1,22 @@
 import Store from "./Store";
 import { CopyPasta } from "../../@types";
+import Impulse from "../Impulse";
 
 
 
 export default class TestStore implements Store {
+    private readonly impulse: Impulse<CopyPasta[]>;
+
+
+
+    constructor() {
+        this.impulse = new Impulse<CopyPasta[]>({
+            pulseOnDuplicate: true
+        });
+    }
+
+
+
     getAll(): CopyPasta[] {
         return [{
             id: 1,
@@ -38,6 +51,17 @@ export default class TestStore implements Store {
             tags: ["carried", "?", "never", "fieryrage"],
             content: "Carried? Never. fieryrage never gets carried. I would personally like to thank fieryrageosu, for carrying me. Without you this team would've been nothing. On this Thanksgiving Day I will give thanks to fieryrage in the OWC tournament. Thank you."
         }];
+    }
+
+    items(): Impulse<CopyPasta[]> {
+        this.impulse.pulse(this.getAll());
+        return this.impulse;
+    }
+
+    add(cp: CopyPasta) {
+        const items = this.impulse.value() ?? [];
+        items.push(cp);
+        this.impulse.pulse(items);
     }
 
     save(cp: CopyPasta[]): void {}

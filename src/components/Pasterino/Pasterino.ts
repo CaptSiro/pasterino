@@ -1,20 +1,13 @@
 import "./Pasterino.css";
-import { _, Div } from "../../lib/tungsten/jsml";
-import { Keyboard } from "../../lib/Keyboard";
+import { Div } from "../../lib/tungsten/jsml";
 import CopyPastaView from "../CopyPastasView/CopyPastaView";
-import Platform from "../../platform/Platform";
 import { url } from "../../lib/location-listener";
 import { hideWidget, toggleWidgetVisibility } from "./widget-visibility";
 import Selector from "../../lib/Selector";
-import ctrlSpaceVisibility from "./registers/ctrl-space-visibility";
-import enterSubmit from "./registers/enter-submit";
-import shiftDeleteRemove from "./registers/shift-delete-remove";
-import arrowUpPrevious from "./registers/arrow-up-previous";
-import arrowDownNext from "./registers/arrow-down-next";
-import escapeHide from "./registers/escape-hide";
-import { store } from "../../main";
 import usePrompt from "../../hooks/use-prompt";
-import SelfPromo from "../SelfPromo";
+import SelfPromo from "../SelfPromo/SelfPromo";
+import useShortcuts from "../../hooks/use-shortcuts";
+import getStore from "../../lib/store/get-store";
 
 
 
@@ -22,9 +15,9 @@ export const CLASS_PASTERINO_WIDGET = "pasterino-root";
 
 
 
-export default function Pasterino(chatInput: HTMLElement, platform: Platform): HTMLElement {
-    const prompt = usePrompt(platform);
-    const selector = new Selector(store.getAll(), prompt);
+export default function Pasterino(chatInput: HTMLElement): HTMLElement {
+    const prompt = usePrompt();
+    const selector = new Selector(getStore().items(), prompt);
 
 
 
@@ -56,36 +49,10 @@ export default function Pasterino(chatInput: HTMLElement, platform: Platform): H
 
 
 
-    const middleware = new Keyboard()
-        .register({
-            key: " ",
-            modifiers: ["ctrl"],
-            onPress: ctrlSpaceVisibility(widget)
-        })
-        .register({
-            key: "Escape",
-            onPress: escapeHide(widget)
-        })
-        .register({
-            key: "Enter",
-            onPress: enterSubmit(widget, selector, platform)
-        })
-        .register({
-            key: "Delete",
-            modifiers: ["shift"],
-            onPress: shiftDeleteRemove(widget, selector)
-        })
-        .register({
-            key: "ArrowUp",
-            onPress: arrowUpPrevious(widget, selector)
-        })
-        .register({
-            key: "ArrowDown",
-            onPress: arrowDownNext(widget, selector)
-        });
+    const shortcuts = useShortcuts(widget, selector);
 
-    chatInput.removeEventListener("keydown", middleware.eventHandler, { capture: true });
-    chatInput.addEventListener("keydown", middleware.eventHandler, { capture: true });
+    chatInput.removeEventListener("keydown", shortcuts.eventHandler, { capture: true });
+    chatInput.addEventListener("keydown", shortcuts.eventHandler, { capture: true });
 
 
 
