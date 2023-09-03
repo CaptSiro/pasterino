@@ -1,0 +1,17 @@
+label.import-file {
+    padding: 8px;
+    outline: 2px solid var(--p-bg-active);
+    border-radius: var(--p-border-radius);
+    border: unset;
+    background-color: var(--p-bg);
+    color: var(--p-text-color);
+}
+
+label.import-file:hover {
+    outline-width: 4px;
+}
+
+label.import-file:focus {
+    outline-color: var(--p-primary-active);
+    outline-width: 4px;
+}

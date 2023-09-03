@@ -5,20 +5,20 @@ import download from "../../lib/download";
 import getStore from "../../store/get-store";
 import useDialog from "../../hooks/use-dialog";
 import CopyPastaAdd from "../CopyPastaAdd/CopyPastaAdd";
+import CopyPastaImport from "../CopyPastaImport/CopyPastaImport";
 
 
 
 export default function SelfPromo(): HTMLElement {
     const add = useDialog(CopyPastaAdd());
-
-
+    const importFromFile = useDialog(CopyPastaImport());
 
     return (
         Div("p-self-promo", [
             UIButton(redirect, "Pasterino"),
             Div("p-controls", [
                 UIButton(() => add.showModal(), "Add"),
-                UIButton(() => {}, "Import"),
+                UIButton(() => importFromFile.showModal(), "Import"),
                 UIButton(() => download("pasterino-copy-pastas.json", JSON.stringify(getStore().getAll())), "Export"),
             ])
         ])

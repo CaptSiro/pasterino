@@ -60,5 +60,24 @@ export default class LocalStore implements Store {
 
     save(cp: CopyPasta[]): void {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(cp));
+        this.impulse.pulse(cp);
+    }
+
+    merge(cps: CopyPasta[]): void {
+        const items = this.getAll();
+
+        for (let i = 0; i < cps.length; i++) {
+            const index = items.findIndex(cp => cp.id === cps[i].id);
+
+            if (index === -1) {
+                items.push(cps[i]);
+                continue;
+            }
+
+            cps[i].id = items.length;
+            items.push(cps[i]);
+        }
+
+        this.save(items);
     }
 }

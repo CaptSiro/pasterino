@@ -13,4 +13,6 @@ export default interface Store {
     add(cp: CopyPasta): void;
 
     delete(id: number): void;
+
+    merge(cps: CopyPasta[]): void;
 }
