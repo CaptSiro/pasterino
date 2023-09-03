@@ -6,6 +6,7 @@ export type CopyPasta = {
     id: number,
     content: string,
     tags: string[],
+    channel?: string
 }
 
 export type Tag = {

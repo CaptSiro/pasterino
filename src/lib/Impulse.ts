@@ -42,4 +42,8 @@ export default class Impulse<T = void> {
       this.listeners[i](value);
     }
   }
+
+  value(): T | undefined {
+    return this.lastValue;
+  }
 }
