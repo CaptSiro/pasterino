@@ -33,7 +33,7 @@ export default function CopyPastaAdd(): HTMLDialogElement {
         }
 
         try {
-            const c = getPlatform().parseChannel(channel.value.trim());
+            const c = channel.value.trim();
 
             getStore().add({
                 id: 0,
@@ -41,7 +41,7 @@ export default function CopyPastaAdd(): HTMLDialogElement {
                 tags: tags.value.trim().split(" ").filter(str => str !== ""),
                 channel: c === ""
                     ? undefined
-                    : c
+                    : getPlatform().parseChannel(c)
             });
 
             clear();
