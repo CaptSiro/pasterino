@@ -1,11 +1,12 @@
-import "./CopyPastaDialog.css";
-import { Component, Div, Label, Span } from "../../lib/tungsten/jsml";
+import "./CopyPastaAdd.css";
+import { Label, Span } from "../../lib/tungsten/jsml";
 import UIButton from "../UI/Button/Button";
 import getStore from "../../store/get-store";
 import UITextArea from "../UI/TextArea/TextArea";
 import UIInput from "../UI/Input/Input";
 import { ShortcutRegistry } from "../../lib/ShortcutRegistry";
 import getPlatform from "../../platform/get-platform";
+import UIDialog from "../UI/Dialog/Dialog";
 
 
 
@@ -70,34 +71,32 @@ export default function CopyPastaAdd(): HTMLDialogElement {
 
 
     const dialog = (
-        Component("dialog", "p-dialog", [
-            Div("p-dialog-wrapper", [
-                Span("p-dialog-legend", "Add new copy pasta"),
-                Div("p-dialog-content", [
-                    Label("p-copy-pasta-content", [
-                        "Copy-pasta content",
-                        content
-                    ]),
-                    Label("p-copy-pasta-tags", [
-                        "Copy-pasta tags",
-                        Span("p-hint", "Separated by space"),
-                        tags
-                    ]),
-                    Label("p-copy-pasta-channel", [
-                        "Copy-pasta channel",
-                        Span("p-hint", "Leave empty to make copy-pasta globally accessible"),
-                        channel
-                    ]),
+        UIDialog(
+            "Add new copy pasta",
+            [
+                Label("p-copy-pasta-content", [
+                    "Copy-pasta content",
+                    content
                 ]),
-                Div("p-dialog-controls", [
-                    UIButton(() => {
-                        clear();
-                        dialog.close();
-                    }, "Cancel"),
-                    UIButton(submit, "Submit"),
+                Label("p-copy-pasta-tags", [
+                    "Copy-pasta tags",
+                    Span("p-hint", "Separated by space"),
+                    tags
+                ]),
+                Label("p-copy-pasta-channel", [
+                    "Copy-pasta channel",
+                    Span("p-hint", "Leave empty to make copy-pasta globally accessible"),
+                    channel
                 ])
-            ]),
-        ], {
+            ],
+            [
+                UIButton(() => {
+                    clear();
+                    dialog.close();
+                }, "Cancel"),
+                UIButton(submit, "Submit")
+            ],
+            {
             onKeyDown: shortcuts.eventHandler,
             onPointerDown: (evt: MouseEvent) => {
                 const box = dialog.getBoundingClientRect();
@@ -111,7 +110,8 @@ export default function CopyPastaAdd(): HTMLDialogElement {
                     dialog.close();
                 }
             }
-        })
+        }
+        )
     );
 
 

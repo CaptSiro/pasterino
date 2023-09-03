@@ -1,0 +1,25 @@
+.p-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    padding: 4px;
+
+    background-color: var(--p-bg-active);
+    color: var(--p-text-color);
+    border-radius: var(--p-border-radius-container);
+    border: unset;
+}
+
+.p-dialog-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.p-dialog .p-dialog-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    gap: 4px;
+}
