@@ -34,6 +34,11 @@
     gap: 8px;
 }
 
+.p-dialog .p-dialog-content label .p-hint {
+    font-size: 0.8em;
+    color: var(--p-text-color-darker);
+}
+
 .p-dialog .p-dialog-controls {
     display: flex;
     justify-content: flex-end;

@@ -13,6 +13,14 @@ type ChatInput = {
 
 
 export default class TwitchPlatform implements Platform {
+    parseChannel(channel: string): string {
+        return this.getChannel(channel);
+    }
+
+    getChannelHint(): string {
+        return "https://www.twitch.tv/btmc";
+    }
+
     getChannel(url: string | undefined): string {
         if (url === undefined) {
             return "";

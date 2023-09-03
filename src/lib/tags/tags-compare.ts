@@ -15,7 +15,7 @@ export default function tagsCompare(tagsOnItem: string[], tags: Tag[]): boolean 
         let includesTag = false;
 
         for (let j = 0; j < tagsOnItem.length; j++) {
-            if (stringCompare(tags[i].name, tagsOnItem[j])) {
+            if (stringCompare(tags[i].name.toLowerCase(), tagsOnItem[j].toLowerCase())) {
                 includesTag = true;
                 break;
             }

@@ -1,8 +1,17 @@
 import Platform from "../Platform";
+import TwitchPlatform from "../twitch.tv/TwitchPlatform";
 
 
 
 export default class TestEnvPlatform implements Platform {
+    parseChannel(channel: string): string {
+        return new TwitchPlatform().parseChannel(channel);
+    }
+
+    getChannelHint(): string {
+        return "https://www.twitch.tv/btmc";
+    }
+
     getChannel(url: string | undefined): string {
         if (url === undefined) {
             return "";

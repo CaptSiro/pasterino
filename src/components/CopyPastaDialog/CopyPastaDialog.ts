@@ -6,6 +6,7 @@ import getStore from "../../store/get-store";
 import UITextArea from "../UI/TextArea/TextArea";
 import UIInput from "../UI/Input/Input";
 import { ShortcutRegistry } from "../../lib/ShortcutRegistry";
+import getPlatform from "../../platform/get-platform";
 
 
 
@@ -15,7 +16,7 @@ export default function CopyPastaDialog(title: string): HTMLDialogElement {
         placeholder: "clueless lulw sadge..."
     });
     const channel = UIInput("text", {
-        placeholder: "Leave empty to be globally accessible"
+        placeholder: "https://www.twitch.tv/btmc"
     });
 
 
@@ -31,17 +32,23 @@ export default function CopyPastaDialog(title: string): HTMLDialogElement {
             return;
         }
 
-        getStore().add({
-            id: 0,
-            content: content.value.trim(),
-            tags: tags.value.trim().split(" ").filter(str => str !== ""),
-            channel: channel.value.trim() === ""
-                ? undefined
-                : channel.value.trim()
-        });
+        try {
+            const c = getPlatform().parseChannel(channel.value.trim());
 
-        clear();
-        dialog.close();
+            getStore().add({
+                id: 0,
+                content: content.value.trim(),
+                tags: tags.value.trim().split(" ").filter(str => str !== ""),
+                channel: c === ""
+                    ? undefined
+                    : c
+            });
+
+            clear();
+            dialog.close();
+        } catch (e) {
+            alert("You must provide valid url to the channel where you want to add this copy-pasta.");
+        }
     }
 
 
@@ -73,11 +80,13 @@ export default function CopyPastaDialog(title: string): HTMLDialogElement {
                         content
                     ]),
                     Label("p-copy-pasta-tags", [
-                        "Copy-pasta tags (space separated)",
+                        "Copy-pasta tags",
+                        Span("p-hint", "Separated by space"),
                         tags
                     ]),
                     Label("p-copy-pasta-channel", [
-                        "Channel where will copy-pasta be available",
+                        "Copy-pasta channel",
+                        Span("p-hint", "Leave empty to make copy-pasta globally accessible"),
                         channel
                     ]),
                 ]),

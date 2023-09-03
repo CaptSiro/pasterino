@@ -8,4 +8,8 @@ export default interface Platform {
     // ui(): PlatformUI interface which includes common ui components for specific platform
 
     getChannel(url: string | undefined): string;
+
+    parseChannel(channel: string): string;
+
+    getChannelHint(): string;
 }
