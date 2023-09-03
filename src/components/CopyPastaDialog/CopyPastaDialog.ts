@@ -2,7 +2,7 @@ import "./CopyPastaDialog.css";
 import { Component, Div, Label, Span } from "../../lib/tungsten/jsml";
 import UIButton from "../UI/Button/Button";
 import { pasterino } from "../../main";
-import getStore from "../../lib/store/get-store";
+import getStore from "../../store/get-store";
 import UITextArea from "../UI/TextArea/TextArea";
 import UIInput from "../UI/Input/Input";
 import { ShortcutRegistry } from "../../lib/ShortcutRegistry";

@@ -1,7 +1,7 @@
 import Selector from "../lib/Selector";
 import { Shortcut } from "../lib/ShortcutRegistry";
 import isVisible from "../components/Pasterino/widget-visibility";
-import getStore from "../lib/store/get-store";
+import getStore from "../store/get-store";
 
 
 

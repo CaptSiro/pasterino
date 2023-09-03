@@ -1,6 +1,6 @@
 import Store from "./Store";
-import { CopyPasta } from "../../@types";
-import Impulse from "../Impulse";
+import { CopyPasta } from "../@types";
+import Impulse from "../lib/Impulse";
 
 
 

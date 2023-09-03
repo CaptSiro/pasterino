@@ -7,7 +7,7 @@ import Selector from "../../lib/Selector";
 import usePrompt from "../../hooks/use-prompt";
 import SelfPromo from "../SelfPromo/SelfPromo";
 import useShortcuts from "../../hooks/use-shortcuts";
-import getStore from "../../lib/store/get-store";
+import getStore from "../../store/get-store";
 
 
 
