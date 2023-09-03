@@ -8,6 +8,7 @@ import stringCompare from "./string-compare";
 import collectTags from "./tags/collect-tags";
 import tagsCompare from "./tags/tags-compare";
 import wordGenerator from "./word-generator";
+import CopyPastaViewEmpty from "../components/CopyPastasView/CopyPastaViewEmpty";
 
 
 
@@ -31,7 +32,7 @@ type SelectorItem = {
 export default class Selector {
     private size: number;
     private pointer: number;
-    private readonly items: SelectorItem[];
+    private items: SelectorItem[];
     private selected: SelectorItem | undefined;
     private parent: HTMLElement | undefined;
 
@@ -43,16 +44,58 @@ export default class Selector {
 
 
 
-    constructor(items: CopyPasta[], private readonly prompt: Impulse<string>) {
+    constructor(private readonly impulse: Impulse<CopyPasta[]>, private readonly prompt: Impulse<string>) {
+        this.impulse.listen(this.render.bind(this));
+
         this.items = [];
         this.size = 0;
         this.pointer = 0;
 
-        for (let i = 0; i < items.length; i++) {
-            this.items.push({
-                copyPasta: items[i],
-                element: CopyPastaItem(items[i], this)
-            });
+        const listener = this.query.bind(this);
+        this.prompt.removeListener(listener);
+        this.prompt.listen(listener);
+    }
+
+
+
+    render(raw: CopyPasta[] | undefined) {
+        if (raw === undefined || this.parent === undefined) {
+            return;
+        }
+
+        if (this.selected !== undefined) {
+            deselect(this.selected.element);
+        }
+
+        this.parent.textContent = "";
+
+        if (raw.length === 0) {
+            this.parent.append(
+                CopyPastaViewEmpty()
+            );
+            return;
+        }
+
+        this.items = new Array(raw.length);
+        this.size = raw.length;
+
+        for (let i = 0; i < raw.length; i++) {
+            const element = CopyPastaItem(raw[i], this);
+
+            this.items[i] = {
+                copyPasta: raw[i],
+                element
+            };
+
+            this.parent.append(element);
+        }
+
+        this.size = this.items.length;
+        this.pointer = 0;
+        this.selected = this.items[this.pointer];
+
+        if (this.selected !== undefined) {
+            select(this.selected.element);
         }
     }
 
@@ -66,22 +109,7 @@ export default class Selector {
 
     setParent(parent: HTMLElement) {
         this.parent = parent;
-
-        for (let i = 0; i < this.items.length; i++) {
-            this.parent.append(this.items[i].element);
-        }
-
-        this.size = this.items.length;
-        this.pointer = 0;
-        this.selected = this.items[this.pointer];
-
-        if (this.selected !== undefined) {
-            select(this.selected.element);
-        }
-
-        const listener = this.query.bind(this);
-        this.prompt.removeListener(listener);
-        this.prompt.listen(this.query.bind(this));
+        this.render(this.impulse.value());
     }
 
 
@@ -161,6 +189,10 @@ export default class Selector {
 
 
     private query(prompt: string): void {
+        if (this.parent === undefined) {
+            return;
+        }
+
         const result = search.parse(prompt);
 
         if (result.type === "error") {
