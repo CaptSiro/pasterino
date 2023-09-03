@@ -1,11 +1,11 @@
-import { KeyboardRegister } from "../../../lib/Keyboard";
-import isVisible, { hideWidget } from "../widget-visibility";
-import Selector from "../../../lib/Selector";
-import getPlatform from "../../../platform/get-platform";
+import { Shortcut } from "../lib/ShortcutRegistry";
+import isVisible, { hideWidget } from "../components/Pasterino/widget-visibility";
+import Selector from "../lib/Selector";
+import getPlatform from "../platform/get-platform";
 
 
 
-export default function enterSubmit(widget: HTMLElement, selector: Selector): KeyboardRegister["onPress"] {
+export default function enterSubmit(widget: HTMLElement, selector: Selector): Shortcut["onPress"] {
     return (evt) => {
         if (!isVisible(widget)) {
             return;

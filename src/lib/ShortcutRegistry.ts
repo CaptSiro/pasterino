@@ -2,7 +2,7 @@ type Modifiers = "ctrl" | "shift" | "alt";
 
 
 
-export type KeyboardRegister = {
+export type Shortcut = {
     onPress: (event: KeyboardEvent) => any,
     key: KeyboardEvent["key"],
     modifiers?: Modifiers[],
@@ -12,10 +12,10 @@ export type KeyboardRegister = {
 
 
 
-export class Keyboard {
-    private readonly registers: KeyboardRegister[] = [];
+export class ShortcutRegistry {
+    private readonly registers: Shortcut[] = [];
 
-    register(r: KeyboardRegister): Keyboard {
+    register(r: Shortcut): ShortcutRegistry {
         this.registers.push(r);
         return this;
     }
