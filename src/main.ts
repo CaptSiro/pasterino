@@ -3,6 +3,7 @@ import { $ } from "./lib/tungsten/domx";
 import getPlatform from "./platform/get-platform";
 import bindLocationListener from "./lib/location-listener";
 import Impulse from "./lib/Impulse";
+import { ShortcutRegistry } from "./lib/ShortcutRegistry";
 
 
 
@@ -11,7 +12,7 @@ export const pasterino = new Impulse<HTMLElement>();
 
 
 async function main(evt: KeyboardEvent) {
-    if (!(evt.key === " " && evt.ctrlKey) || $(".pasterino-root") !== null) {
+    if (!(evt.key === " " && evt.ctrlKey && !evt.altKey) || $(".pasterino-root") !== null) {
         return;
     }
 
@@ -40,12 +41,4 @@ window.addEventListener("load", async () => {
     window.addEventListener("keydown", main);
 
     bindLocationListener();
-    //
-    // const r = await fetch("http://localhost/pasterino-server/auth/set-cookie?s=" + localStorage.getItem("s"), {
-    //     method: "get",
-    //     credentials: "include"
-    // });
-    //
-    // const cookies = await r.json();
-    // console.log("set cookie", cookies);
 }, { once: true });

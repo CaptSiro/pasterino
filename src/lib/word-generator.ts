@@ -4,8 +4,9 @@ export default function* wordGenerator(string: string) {
     for (let i = 0; i < string.length; i++) {
         if (string.charCodeAt(i) !== 32 && string.charCodeAt(i) !== 160) {
             if (i === string.length - 1) {
-                yield string.substring(start, i);
+                yield string.substring(start, i + 1);
             }
+
             continue;
         }
 

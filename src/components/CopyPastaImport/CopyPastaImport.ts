@@ -7,10 +7,11 @@ import { CopyPasta } from "../../@types";
 import isValidCopyPasta from "../../lib/is-valid-copy-pasta";
 import getStore from "../../store/get-store";
 import UIFileInput from "../UI/FileInput/FileInput";
+import useDialog from "../../hooks/use-dialog";
 
 
 
-export default function CopyPastaImport(): HTMLDialogElement {
+export default function CopyPastaImport(): () => void {
     const parsed = new Impulse<CopyPasta[]>();
 
     const reader = new FileReader();
@@ -84,15 +85,34 @@ export default function CopyPastaImport(): HTMLDialogElement {
         ]
     );
 
+    useDialog(dialog);
+
 
 
     submit.addEventListener("pointerdown", () => {
-        getStore().merge(parsed.value() ?? []);
+        const cps = parsed.value();
+
+        if (cps === undefined) {
+            alert("You have not selected file");
+            return;
+        }
+
+        if (cps.length === 0) {
+            alert("File does not contain any copy-pastas");
+            return;
+        }
+
+        getStore().merge(cps);
+
+        alert(`Imported ${cps.length} copy-pastas`);
+
         clear();
         dialog.close();
     });
 
 
 
-    return dialog;
+    return () => {
+        dialog.showModal();
+    }
 }

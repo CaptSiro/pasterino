@@ -7,10 +7,14 @@ import UIInput from "../UI/Input/Input";
 import { ShortcutRegistry } from "../../lib/ShortcutRegistry";
 import getPlatform from "../../platform/get-platform";
 import UIDialog from "../UI/Dialog/Dialog";
+import Impulse from "../../lib/Impulse";
+import useDialog from "../../hooks/use-dialog";
+import usePrompt from "../../hooks/use-prompt";
 
 
 
-export default function CopyPastaAdd(): HTMLDialogElement {
+export default function CopyPastaAdd(): () => void {
+    const prompt = usePrompt();
     const content = UITextArea();
     const tags = UIInput("text", {
         placeholder: "clueless lulw sadge..."
@@ -43,6 +47,8 @@ export default function CopyPastaAdd(): HTMLDialogElement {
                     ? undefined
                     : getPlatform().parseChannel(c)
             });
+
+            alert("Added new copy-pasta. You may not see the copy-pasta if you have specified different channel from where you are now");
 
             clear();
             dialog.close();
@@ -114,7 +120,12 @@ export default function CopyPastaAdd(): HTMLDialogElement {
         )
     );
 
+    useDialog(dialog);
 
 
-    return dialog;
+
+    return () => {
+        content.value = prompt.value() ?? "";
+        dialog.showModal();
+    }
 }

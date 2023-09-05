@@ -10,15 +10,15 @@ import CopyPastaImport from "../CopyPastaImport/CopyPastaImport";
 
 
 export default function SelfPromo(): HTMLElement {
-    const add = useDialog(CopyPastaAdd());
-    const importFromFile = useDialog(CopyPastaImport());
+    const openAdd = CopyPastaAdd();
+    const openImport = CopyPastaImport();
 
     return (
         Div("p-self-promo", [
             UIButton(redirect, "Pasterino"),
             Div("p-controls", [
-                UIButton(() => add.showModal(), "Add"),
-                UIButton(() => importFromFile.showModal(), "Import"),
+                UIButton(openAdd, "Add"),
+                UIButton(openImport, "Import"),
                 UIButton(() => download("pasterino-copy-pastas.json", JSON.stringify(getStore().getAll())), "Export"),
             ])
         ])

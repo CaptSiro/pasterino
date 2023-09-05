@@ -14,7 +14,16 @@ export default function useShortcuts(widget: HTMLElement, selector: Selector): S
         .register({
             key: " ",
             modifiers: ["ctrl"],
-            onPress: ctrlSpaceVisibility(widget)
+            onPress: ctrlSpaceVisibility(widget),
+            preventDefault: true,
+            stopPropagation: true
+        })
+        .register({
+            key: " ",
+            modifiers: ["ctrl", "shift"],
+            onPress: ctrlSpaceVisibility(widget),
+            preventDefault: true,
+            stopPropagation: true
         })
         .register({
             key: "Escape",
