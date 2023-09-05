@@ -3,7 +3,6 @@ import { $ } from "./lib/tungsten/domx";
 import getPlatform from "./platform/get-platform";
 import bindLocationListener from "./lib/location-listener";
 import Impulse from "./lib/Impulse";
-import { ShortcutRegistry } from "./lib/ShortcutRegistry";
 
 
 

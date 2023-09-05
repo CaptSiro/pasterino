@@ -7,7 +7,6 @@ import UIInput from "../UI/Input/Input";
 import { ShortcutRegistry } from "../../lib/ShortcutRegistry";
 import getPlatform from "../../platform/get-platform";
 import UIDialog from "../UI/Dialog/Dialog";
-import Impulse from "../../lib/Impulse";
 import useDialog from "../../hooks/use-dialog";
 import usePrompt from "../../hooks/use-prompt";
 

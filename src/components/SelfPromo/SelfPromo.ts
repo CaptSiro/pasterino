@@ -3,7 +3,6 @@ import { Div } from "../../lib/tungsten/jsml";
 import UIButton from "../UI/Button/Button";
 import download from "../../lib/download";
 import getStore from "../../store/get-store";
-import useDialog from "../../hooks/use-dialog";
 import CopyPastaAdd from "../CopyPastaAdd/CopyPastaAdd";
 import CopyPastaImport from "../CopyPastaImport/CopyPastaImport";
 
