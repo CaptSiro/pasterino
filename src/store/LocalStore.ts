@@ -74,7 +74,7 @@ export default class LocalStore implements Store {
                 continue;
             }
 
-            cps[i].id = items.length;
+            cps[i].id = 1 + items.reduce((max, current) => Math.max(max, current.id), -1);
             items.push(cps[i]);
         }
 
