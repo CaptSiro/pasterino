@@ -36,7 +36,7 @@ export default class LocalStore implements Store {
     add(cp: CopyPasta) {
         const items = this.impulse.value() ?? [];
 
-        cp.id = items.length;
+        cp.id = 1 + items.reduce((max, current) => Math.max(max, current.id), -1);
         items.push(cp);
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
