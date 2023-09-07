@@ -9,10 +9,18 @@ import getPlatform from "../../platform/get-platform";
 import UIDialog from "../UI/Dialog/Dialog";
 import useDialog from "../../hooks/use-dialog";
 import usePrompt from "../../hooks/use-prompt";
+import Alert from "../Alert/Alert";
 
 
 
 export default function CopyPastaAdd(): () => void {
+    const openAddAlert = Alert(
+        "Added new copy-pasta. You may not see the copy-pasta if you have specified different channel from where you are now",
+        "added_copy_pasta_notice"
+    );
+
+
+
     const prompt = usePrompt();
     const content = UITextArea();
     const tags = UIInput("text", {
@@ -47,10 +55,10 @@ export default function CopyPastaAdd(): () => void {
                     : getPlatform().parseChannel(c)
             });
 
-            alert("Added new copy-pasta. You may not see the copy-pasta if you have specified different channel from where you are now");
-
             clear();
             dialog.close();
+
+            openAddAlert();
         } catch (e) {
             alert("You must provide valid url to the channel where you want to add this copy-pasta.");
         }

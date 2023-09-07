@@ -1,0 +1,37 @@
+.p-ui-check-box {
+    line-height: 1.1;
+    display: flex;
+    gap: 0.5em;
+    flex-direction: row !important;
+}
+
+.p-ui-check-box + .p-ui-check-box {
+    margin-top: 1em;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    background-color: var(--p-bg);
+    border: 2px solid var(--p-bg);
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    outline: 2px solid var(--p-bg-active);
+    border-radius: var(--p-border-radius);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--p-primary-active);
+}
+
+input[type="checkbox"]:focus {
+    outline-color: var(--p-primary-active);
+    outline-width: 4px;
+}

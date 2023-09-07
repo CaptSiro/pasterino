@@ -8,10 +8,12 @@ import isValidCopyPasta from "../../lib/is-valid-copy-pasta";
 import getStore from "../../store/get-store";
 import UIFileInput from "../UI/FileInput/FileInput";
 import useDialog from "../../hooks/use-dialog";
+import Alert from "../Alert/Alert";
 
 
 
 export default function CopyPastaImport(): () => void {
+    const openImportAlert = Alert("Imported 0 copy-pastas", "imported_copy_pasta")
     const parsed = new Impulse<CopyPasta[]>();
 
     const reader = new FileReader();
@@ -104,7 +106,7 @@ export default function CopyPastaImport(): () => void {
 
         getStore().merge(cps);
 
-        alert(`Imported ${cps.length} copy-pastas`);
+        openImportAlert(`Imported ${cps.length} copy-pastas`);
 
         clear();
         dialog.close();
