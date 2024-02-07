@@ -2,6 +2,10 @@
 
 Your web browser extension for managing Twitch copy-pastas
 
+Pasterino widget next to chatbox like this:
+
+![](widget-showing-screenshot.png)
+
 # Installation
 
 1. Download [latest release](https://github.com/CaptSiro/pasterino/releases)
