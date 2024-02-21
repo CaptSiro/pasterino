@@ -11,10 +11,10 @@ Pasterino widget next to chatbox like this:
 1. Download [latest release](https://github.com/CaptSiro/pasterino/releases)
 2. Extract zip file
 3. Click to your browser version to manage extensions:
-    - [Chrome](chrome://extensions/)
-    - [Opera](chrome://extensions/)
-    - [Opera GX](chrome://extensions/)
-    - [Edge](edge://extensions/)
+    - Google Chrome: [link](chrome://extensions/)
+    - Opera: [link](chrome://extensions/)
+    - Opera GX: [link](chrome://extensions/)
+    - Edge: [link](edge://extensions/)
 4. Enable developer mode
     - Chrome: top right
     - Opera: top right
