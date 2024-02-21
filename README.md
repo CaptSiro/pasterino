@@ -10,7 +10,7 @@ Pasterino widget next to chatbox like this:
 
 1. Download [latest release](https://github.com/CaptSiro/pasterino/releases)
 2. Extract zip file
-3. Navigate to your extensions:
+3. Click to your browser version to manage extensions:
     - [Chrome](chrome://extensions/)
     - [Opera](chrome://extensions/)
     - [Opera GX](chrome://extensions/)
